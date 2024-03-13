@@ -1,9 +1,9 @@
-version: 0.0.1
+version: 0.0.2
 jobId: "443"
 jobName: aws_sadp_csv_sparksql_iceberg_sale
 jobType: Source Aligned Data Product
 domain: sale
-alias: Write_iceberg23
+alias: Write_iceberg
 discoveryPort:
   name: aws_sadp_csv_sparksql_iceberg_sale
 inputPorts:
@@ -16,17 +16,14 @@ inputPorts:
         delimiter: ","
       enableDataReconciliation: false
       enforceSchema: false
-      connection: on_prim_testing_conn_s3_vishnu
+      connection: read_csv_s3_conn
       dataSetUrn: urn:dv:dataset:b2f5c90b-bc84-4569-9832-14b439a0624c
     type: inputDelimited
 productState:
   isDynamic: true
   alias: Write_iceberg
   retentionVersions: ""
-  logicalSchema:
-    properties:
-      City: STRING
-      Region: STRING
+  logicalSchema: ""
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
