@@ -1,9 +1,9 @@
-version: 0.0.2
+version: 0.0.3
 jobId: "443"
 jobName: aws_sadp_csv_sparksql_iceberg_sale
 jobType: Source Aligned Data Product
 domain: sale
-alias: Write_iceberg
+alias: Write_iceberg24
 discoveryPort:
   name: aws_sadp_csv_sparksql_iceberg_sale
 inputPorts:
@@ -23,7 +23,10 @@ productState:
   isDynamic: true
   alias: Write_iceberg
   retentionVersions: ""
-  logicalSchema: ""
+  logicalSchema:
+    properties:
+      City: STRING
+      Region: STRING
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
