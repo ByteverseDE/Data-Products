@@ -1,0 +1,59 @@
+version: 0.0.1
+jobId: "443"
+jobName: aws_sadp_csv_sparksql_iceberg_sale
+jobType: Source Aligned Data Product
+domain: sale
+alias: Write_iceberg
+discoveryPort:
+  name: aws_sadp_csv_sparksql_iceberg_sale
+inputPorts:
+  - alias: read_csv_generic_1
+    isDynamic: true
+    path: s3://byte-etl-externaldemo/University_Admsn_Data/csv_files/university_admission.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: on_prim_testing_conn_s3_vishnu
+      dataSetUrn: urn:dv:dataset:b2f5c90b-bc84-4569-9832-14b439a0624c
+    type: inputDelimited
+productState:
+  isDynamic: true
+  alias: Write_iceberg
+  retentionVersions: ""
+  logicalSchema: ""
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3source.data_1
+  warehousePath: s3://byte-etl-externaldemo/University_Admsn_Data/iceberg_warehouse/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: false
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: None
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: Reading_CSV
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: read_csv_generic_1
+        tempViewName: tempview
+    query: select * from tempview
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
+outputPort:
+  subscriptionChannels:
+    - channelType: Postgres
+      queryType: SQL
+    - channelType: Dataproduct
+      queryType: SQL
