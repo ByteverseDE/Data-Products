@@ -1,0 +1,44 @@
+version: 0.0.2
+jobId: "454"
+jobName: aws_adp_iceberg_csv_sale
+jobType: Aggregated Data Product
+domain: sale
+alias: write_csv
+discoveryPort:
+  name: aws_adp_iceberg_csv_sale
+inputPorts:
+  - alias: aws_sadp_csv_sparksql_iceberg_sale_1
+    isDynamic: true
+    dataProductUrn: urn:dv:dataproduct:acdbe897-349e-4b2d-8052-6882f5f95ff8
+    filter: ""
+    projection: ""
+    optional:
+      persistDataFrame: false
+    type: dataproduct
+productState:
+  isDynamic: true
+  alias: write_csv
+  retentionVersions: ""
+  logicalSchema: ""
+  stateStoreType: writeDataFrameToCsv
+  isProfilingEnabled: false
+  partitionFiles: 1
+  path: s3://byte-etl-externaldemo/University_Admsn_Data/write_csv_files/
+  optional:
+    persistDataFrame: false
+    advanceOptions:
+      header: true
+    addRunIdColumn: false
+    enableDataReconciliation: false
+    enforceSchema: false
+    connection: read_csv_s3_conn
+  refreshInterval: None
+transformation: []
+controlPort:
+  dataQualityRules: {}
+outputPort:
+  subscriptionChannels:
+    - channelType: Postgres
+      queryType: SQL
+    - channelType: Dataproduct
+      queryType: SQL
