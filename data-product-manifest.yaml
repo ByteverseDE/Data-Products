@@ -1,4 +1,4 @@
-version: 0.0.3
+version: 0.0.4
 jobId: "457"
 jobName: aws_adp_write_iceberg_finance
 jobType: Aggregated Data Product
@@ -44,7 +44,7 @@ transformation:
     sequence: 2
     inputDataFrameList:
       - inputDataFrame: aws_sadp_csv_sparksql_iceberg_finance_1
-        tempViewName: ""
+        tempViewName: tempview
     query: select * from tempview
     optional:
       persistDataFrame: false
