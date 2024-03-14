@@ -1,0 +1,59 @@
+version: 0.0.2
+jobId: "457"
+jobName: aws_adp_write_iceberg_finance
+jobType: Aggregated Data Product
+domain: finance
+alias: write_iceberg_vishnu
+discoveryPort:
+  name: aws_adp_write_iceberg_finance
+inputPorts:
+  - alias: aws_sadp_csv_sparksql_iceberg_finance_1
+    isDynamic: true
+    dataProductUrn: urn:dv:dataproduct:490fea35-414b-409c-b90d-a60acd60ccb8
+    filter: ""
+    projection: ""
+    optional:
+      persistDataFrame: false
+    type: dataproduct
+productState:
+  isDynamic: true
+  alias: write_iceberg_vishnu
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      a:
+        type: STRING
+        description: ""
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: s3source.data_2
+  warehousePath: s3://byte-etl-externaldemo/University_Admsn_Data/iceberg_warehouse/
+  catalogName: glue
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: false
+    enforceSchemaMethod: Warning
+    catalogType: glue
+  refreshInterval: 10 10 3 3 1
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: read_sadp
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: aws_sadp_csv_sparksql_iceberg_finance_1
+        tempViewName: ""
+    query: select * from tempview
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
+outputPort:
+  subscriptionChannels:
+    - channelType: Postgres
+      queryType: SQL
+    - channelType: Dataproduct
+      queryType: SQL
