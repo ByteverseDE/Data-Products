@@ -3,7 +3,7 @@ jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
 domain: sale
-alias: write_csv23
+alias: write_iceberg
 discoveryPort:
   name: aws_adp_iceberg_csv_sale
 inputPorts:
@@ -17,26 +17,34 @@ inputPorts:
     type: dataproduct
 productState:
   isDynamic: true
-  alias: write_csv
+  alias: write_iceberg
   retentionVersions: ""
-  logicalSchema:
-    properties:
-      City: STRING
-      Region: STRING
-  stateStoreType: writeDataFrameToCsv
+  logicalSchema: ""
+  stateStoreType: loadDataIceberg
   isProfilingEnabled: false
-  partitionFiles: 1
-  path: s3://byte-etl-externaldemo/University_Admsn_Data/write_csv_files/
+  updateStrategy: Overwrite
+  tableName: s3source.data_2
+  warehousePath: s3://byte-etl-externaldemo/University_Admsn_Data/iceberg_warehouse/
+  catalogName: glue
   optional:
     persistDataFrame: false
-    advanceOptions:
-      header: true
-    addRunIdColumn: false
     enableDataReconciliation: false
     enforceSchema: false
-    connection: read_csv_s3_conn
+    enforceSchemaMethod: Warning
+    catalogType: glue
   refreshInterval: 10 10 3 3 1
-transformation: []
+transformation:
+  - isDynamic: true
+    alias: Spark_SQL_1
+    description: read_sadp
+    sequence: 2
+    inputDataFrameList:
+      - inputDataFrame: aws_sadp_csv_sparksql_iceberg_sale_1
+        tempViewName: tempview
+    query: select * from tempview
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
 controlPort:
   dataQualityRules: {}
 outputPort:
