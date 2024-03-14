@@ -1,9 +1,9 @@
-version: 0.0.2
+version: 0.0.3
 jobId: "457"
 jobName: aws_adp_write_iceberg_finance
 jobType: Aggregated Data Product
 domain: finance
-alias: write_iceberg_vishnu
+alias: write_iceberg_vishnu1
 discoveryPort:
   name: aws_adp_write_iceberg_finance
 inputPorts:
@@ -17,7 +17,7 @@ inputPorts:
     type: dataproduct
 productState:
   isDynamic: true
-  alias: write_iceberg_vishnu
+  alias: write_iceberg_vishnu1
   retentionVersions: ""
   logicalSchema:
     properties:
