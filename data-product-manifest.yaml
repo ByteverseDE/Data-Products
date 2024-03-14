@@ -1,4 +1,4 @@
-version: 0.0.4
+version: 0.0.5
 jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
