@@ -1,9 +1,9 @@
-version: 0.0.2
+version: 0.0.3
 jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
 domain: sale
-alias: write_csv23
+alias: write_csv
 discoveryPort:
   name: aws_adp_iceberg_csv_sale
 inputPorts:
@@ -19,10 +19,7 @@ productState:
   isDynamic: true
   alias: write_csv
   retentionVersions: ""
-  logicalSchema:
-    properties:
-      City: STRING
-      Region: STRING
+  logicalSchema: ""
   stateStoreType: writeDataFrameToCsv
   isProfilingEnabled: false
   partitionFiles: 1
@@ -35,7 +32,7 @@ productState:
     enableDataReconciliation: false
     enforceSchema: false
     connection: read_csv_s3_conn
-  refreshInterval: None
+  refreshInterval: 10 10 3 3 1
 transformation: []
 controlPort:
   dataQualityRules: {}
