@@ -1,27 +1,23 @@
-version: 0.0.2
-jobId: "444"
-jobName: aws_sadp_csv_sparksql_iceberg_finance
-jobType: Source Aligned Data Product
+version: 0.0.1
+jobId: "457"
+jobName: aws_adp_write_iceberg_finance
+jobType: Aggregated Data Product
 domain: finance
-alias: Write_iceberg21
+alias: write_iceberg_vishnu
 discoveryPort:
-  name: aws_sadp_csv_sparksql_iceberg_finance
+  name: aws_adp_write_iceberg_finance
 inputPorts:
-  - alias: read_csv_generic_1
+  - alias: aws_sadp_csv_sparksql_iceberg_finance_1
     isDynamic: true
-    path: s3://byte-etl-externaldemo/University_Admsn_Data/csv_files/university_admission.csv
+    dataProductUrn: urn:dv:dataproduct:490fea35-414b-409c-b90d-a60acd60ccb8
+    filter: ""
+    projection: ""
     optional:
       persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: read_csv_s3_conn
-      dataSetUrn: urn:dv:dataset:b2f5c90b-bc84-4569-9832-14b439a0624c
-    type: inputDelimited
+    type: dataproduct
 productState:
   isDynamic: true
-  alias: Write_iceberg21
+  alias: write_iceberg_vishnu
   retentionVersions: ""
   logicalSchema:
     properties:
@@ -31,7 +27,7 @@ productState:
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
-  tableName: s3source.data_1
+  tableName: s3source.data_2
   warehousePath: s3://byte-etl-externaldemo/University_Admsn_Data/iceberg_warehouse/
   catalogName: glue
   optional:
@@ -44,11 +40,11 @@ productState:
 transformation:
   - isDynamic: true
     alias: Spark_SQL_1
-    description: Reading_CSV
+    description: read_sadp
     sequence: 2
     inputDataFrameList:
-      - inputDataFrame: read_csv_generic_1
-        tempViewName: tempview
+      - inputDataFrame: aws_sadp_csv_sparksql_iceberg_finance_1
+        tempViewName: ""
     query: select * from tempview
     optional:
       persistDataFrame: false
