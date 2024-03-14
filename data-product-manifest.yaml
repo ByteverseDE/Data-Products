@@ -1,9 +1,9 @@
-version: 0.0.3
+version: 0.0.4
 jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
 domain: sale
-alias: write_csv
+alias: write_csv23
 discoveryPort:
   name: aws_adp_iceberg_csv_sale
 inputPorts:
@@ -19,7 +19,10 @@ productState:
   isDynamic: true
   alias: write_csv
   retentionVersions: ""
-  logicalSchema: ""
+  logicalSchema:
+    properties:
+      City: STRING
+      Region: STRING
   stateStoreType: writeDataFrameToCsv
   isProfilingEnabled: false
   partitionFiles: 1
