@@ -1,9 +1,9 @@
-version: 0.0.6
+version: 0.0.7
 jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
 domain: sale
-alias: write_iceberg
+alias: write_iceberg_vishnu
 discoveryPort:
   name: aws_adp_iceberg_csv_sale
 inputPorts:
@@ -17,7 +17,7 @@ inputPorts:
     type: dataproduct
 productState:
   isDynamic: true
-  alias: write_iceberg
+  alias: write_iceberg_vishnu
   retentionVersions: ""
   logicalSchema:
     properties:
