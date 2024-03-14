@@ -1,9 +1,9 @@
-version: 0.0.1
+version: 0.0.2
 jobId: "444"
 jobName: aws_sadp_csv_sparksql_iceberg_finance
 jobType: Source Aligned Data Product
 domain: finance
-alias: Write_iceberg
+alias: Write_iceberg21
 discoveryPort:
   name: aws_sadp_csv_sparksql_iceberg_finance
 inputPorts:
@@ -21,9 +21,13 @@ inputPorts:
     type: inputDelimited
 productState:
   isDynamic: true
-  alias: Write_iceberg
+  alias: Write_iceberg21
   retentionVersions: ""
-  logicalSchema: ""
+  logicalSchema:
+    properties:
+      a:
+        type: STRING
+        description: ""
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
