@@ -1,4 +1,4 @@
-version: 0.0.5
+version: 0.0.6
 jobId: "454"
 jobName: aws_adp_iceberg_csv_sale
 jobType: Aggregated Data Product
@@ -19,7 +19,11 @@ productState:
   isDynamic: true
   alias: write_iceberg
   retentionVersions: ""
-  logicalSchema: ""
+  logicalSchema:
+    properties:
+      a:
+        type: STRING
+        description: ""
   stateStoreType: loadDataIceberg
   isProfilingEnabled: false
   updateStrategy: Overwrite
